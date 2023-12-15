@@ -18,4 +18,4 @@ Within the data files, the columns contain the following information:
 
 Study Citations and Information.xlsx - this file contains information on every trait and study, including total SNPs in that study and a link to the paper.
 
-Analysis Code.txt - note that the Excel files listed above have been transformed to .csv files, that were then analyzed in R.
+Analysis Code.txt - note that the Excel files listed above have been transformed to .csv files, that were then analyzed in R. Note that this led to new filenames that are referenced in the code - however the contents are the same as the files above.
