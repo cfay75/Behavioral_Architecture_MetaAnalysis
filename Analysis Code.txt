@@ -1,0 +1,23 @@
+R version 4.1.0 (2021-05-18) -- "Camp Pontanezen"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+
+# load libraries
+> library(lme4)
+> library(emmeans)
+
+# prepare data files
+> significance <- read.csv("Significance.csv")
+> effect <- read.csv("Effect.csv")
+> proportion <- read.csv("proportion.csv")
+
+#Construct models
+> effect_model <- glmer(AbsEffect ~ Category + Data.Type + DGRP.lines + (1|Study), data = effect, family = Gamma(link = "inverse"))
+> significance_model <- glmer(transformed_pvalue ~ Category + Data.Type + DGRP.lines + (1|Study), data = significance, family = Gamma(link = "inverse"))
+> proportion_model <- lmer(Logit_proportion ~ Category + Data.Type + DGRP.lines + (1|Study), data = proportion)
+
+#Conduct pairwise comparisons
+> contrast(emmeans(effect_model, ~Category, type = "response"), "pairwise")
+> contrast(emmeans(significance_model, ~Category, type = "response"), "pairwise")
+> contrast(emmeans(proportion_model, ~Category, type = "response"), "pairwise")
